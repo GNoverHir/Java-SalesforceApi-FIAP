@@ -40,9 +40,17 @@ public class UsuarioResource {
     public Response loginUsuario(Usuario usuario){
         Optional<Usuario> usuarioOptional = usuarioRepository.verificacaoLogin(usuario.getEmail(), usuario.getSenha());
         if (usuarioOptional.isPresent()) {
-            return Response.status(Response.Status.OK).entity(usuarioOptional.get()).build();
+            return Response.status(Response.Status.OK)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers","origin, content-type, accept, authorization")
+                    .header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
         } else {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers","origin, content-type, accept, authorization")
+                    .header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
         }
     }
 
@@ -56,8 +64,10 @@ public class UsuarioResource {
                 .header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
 
+
     @OPTIONS
-    public Response handlePreflight(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
+    @Path("/login")
+    public Response handlePreflightLogin(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
         return Response.ok()
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
@@ -66,4 +76,16 @@ public class UsuarioResource {
                 .header("Access-Control-Max-Age", "1209600")
                 .build();
     }
+
+    @OPTIONS
+    public Response handlePreflightCadastro(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .header("Access-Control-Max-Age", "1209600")
+                .build();
+    }
+
 }

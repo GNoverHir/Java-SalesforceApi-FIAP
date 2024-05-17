@@ -3,7 +3,7 @@ package br.com.fiap.models;
 public class Usuario {
     private String nomeCompleto;
     private String email;
-    private int telefone;
+    private String telefone;
     private int tamanhoEmpresa;
     private String pais;
     private String idioma;
@@ -13,7 +13,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String idioma, String pais, int tamanhoEmpresa, int telefone, String senha, String email, String nomeCompleto) {
+    public Usuario(String idioma, String pais, int tamanhoEmpresa, String telefone, String senha, String email, String nomeCompleto) {
         this.idioma = idioma;
         this.pais = pais;
         this.tamanhoEmpresa = tamanhoEmpresa;
@@ -60,11 +60,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

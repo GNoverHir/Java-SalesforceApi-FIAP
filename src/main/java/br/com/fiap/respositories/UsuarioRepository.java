@@ -54,7 +54,7 @@ public class UsuarioRepository {
                             resultSet.getString(TABLE_COLUMNS.get("IDIOMA")),
                             resultSet.getString(TABLE_COLUMNS.get("PAIS")),
                             resultSet.getInt(TABLE_COLUMNS.get("TAMEMPRESA")),
-                            resultSet.getInt(TABLE_COLUMNS.get("TELEFONE")),
+                            resultSet.getString(TABLE_COLUMNS.get("TELEFONE")),
                             resultSet.getString(TABLE_COLUMNS.get("SENHA")),
                             resultSet.getString(TABLE_COLUMNS.get("EMAIL")),
                             resultSet.getString(TABLE_COLUMNS.get("NOME"))
@@ -83,7 +83,7 @@ public class UsuarioRepository {
         ) {
             preparedStatement.setString(1, usuario.getNomeCompleto());
             preparedStatement.setString(2, usuario.getEmail());
-            preparedStatement.setInt(3, usuario.getTelefone());
+            preparedStatement.setString(3, usuario.getTelefone());
             preparedStatement.setInt(4, usuario.getTamanhoEmpresa());
             preparedStatement.setString(5, usuario.getPais());
             preparedStatement.setString(6, usuario.getIdioma());
