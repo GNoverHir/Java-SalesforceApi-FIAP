@@ -2,6 +2,9 @@ package br.com.fiap.respositories;
 
 import br.com.fiap.models.Usuario;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,6 +15,7 @@ import static java.util.Map.entry;
 
 public class UsuarioRepository {
 
+    public static final Logger LOGGER = LogManager.getLogger(UsuarioRepository.class);
     public static String URL_ORACLE;
     public static String USER;
     public static String PASSWORD;
@@ -62,8 +66,10 @@ public class UsuarioRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+                    LOGGER.error("Erro ao tentar verificar o login do usuario!",
+                    e.getMessage());
         }
+        LOGGER.info("Usuario verificado com sucesso!");
         return Optional.empty();
     }
 
@@ -91,8 +97,12 @@ public class UsuarioRepository {
             preparedStatement.executeUpdate();
         }
         catch(SQLException e){
-            e.printStackTrace();
+                    LOGGER.error("Erro ao cadastrar usuario!",
+                    e.getMessage());
         }
+        LOGGER.info("Usuario cadastrado com sucesso!");
+        return;
+
     }
 
 }
